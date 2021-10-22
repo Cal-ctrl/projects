@@ -1,0 +1,33 @@
+body {
+  font-family: "Montserrat", sans-serif;
+  }
+
+.article {
+    display: flex;
+  padding-left: 10%;
+  padding-right: 10%;
+  padding-bottom: 5%;
+  align-items: center;
+  justify-content: space-around;
+  background-color: #fff;
+  background-image: url("https://www.transparenttextures.com/patterns/axiom-pattern.png");
+  }
+
+#left {
+  width: 140px;
+  padding-right: 75px;
+}
+
+#right {
+  width: 140px;
+  text-align: right;
+  padding-left: 75px;
+}
+
+.alt {
+  text-align: right;
+}
+
+#me {
+    width: 70%;
+  }
