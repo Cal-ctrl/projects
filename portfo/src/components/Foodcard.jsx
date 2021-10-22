@@ -35,7 +35,7 @@ function FoodCard (props) {
     <CardActions>
       <Button size="small">Learn More</Button>
       <Button size="small">Review</Button>
-      <Link to={{
+      <Link className="btn btn-lg btn-primary btn-sm" to={{
         pathname: "/allergen/" + props.id + "/add",
         state: {
               currentFood: props.foodOb

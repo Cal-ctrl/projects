@@ -17,8 +17,13 @@ class AllergyDataService {
         let string = ""
 
         const queries = Object.entries(query)
-        queries.forEach(([k,v]) => {
-        string = string.concat(String(k), "=", String(v))
+        queries.forEach(([k,v], i) => {
+            const amountQueries = queries.length - 1
+        if (i === amountQueries) {
+            string = string.concat(String(k), "=", String(v))
+        } else {
+            string = string.concat(String(k), "=", String(v),"&")
+        }
         })
         console.log(string);
         return http.get(`/allergy?${string}`);

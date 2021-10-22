@@ -3,7 +3,8 @@ import Container from 'react-bootstrap/esm/Container';
 import AllergyDataService from "../services/allergy";
 import Foodcard from "./Foodcard.jsx";
 import { Box } from '@mui/system';
-import FilterOptions from "./FilterOptions.jsx"
+import FilterOptions from "./FilterOptions.jsx";
+
 
 function AllergenRender() {
 

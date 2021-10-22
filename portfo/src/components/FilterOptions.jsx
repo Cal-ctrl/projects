@@ -10,6 +10,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 import Fab from '@mui/material/Fab';
 import AllergyDataService from "../services/allergy";
+import { Link } from "react-router-dom";
 
 
 
@@ -105,7 +106,7 @@ function FilterOptions(props) {
 
 
     return <Container fluid> 
-    <h3 style={{display: "inline"}}>Filters</h3><Fab sx={{display: "inline"}} size="small" onClick={handleExpand}>{filterState ? <ExpandMoreIcon /> : <ExpandLessIcon />}</Fab>
+    <h3 style={{display: "inline"}}>Options</h3><Fab sx={{display: "inline"}} size="small" onClick={handleExpand}>{filterState ? <ExpandMoreIcon fontSize="small" /> : <ExpandLessIcon fontSize="small" />}</Fab>
 
     {filterState &&
     <div>
@@ -130,10 +131,12 @@ function FilterOptions(props) {
     <Box sx={{
     display: 'grid',
     gap: 1,
-    gridTemplateColumns: 'repeat(4, 1fr)',
+    gridTemplateColumns: 'repeat(6, 1fr)',
   }}>
     <Button type="submit" onClick={handleFilter}>Filter</Button>
     <Button type="submit" onClick={handleClear}>Clear Filters</Button>
+    <Link className="btn btn-sm btn-primary" to={{pathname: "/allergen/add"}}>Add</Link>
+
     </Box>
     </div>
       }
