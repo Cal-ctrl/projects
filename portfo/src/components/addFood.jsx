@@ -45,7 +45,7 @@ function AddFood(props) {
 
     function handleChange(e){
         const temp = {...newFoodItem}
-        if (e.taget.name === "currentMenu") {
+        if (e.target.name === "currentMenu") {
             temp.currentMenu = e.target.checked
         } else {
         temp[[e.target.name]] = e.target.value
@@ -73,7 +73,7 @@ function AddFood(props) {
 
 
     return (
-        <Container>
+        <Container fluid>
         {submitted ? <div><h1>Submitted!</h1><Link to="/allergen">Back to Allergy Page</Link></div> : 
         
         <Form>
@@ -89,7 +89,6 @@ function AddFood(props) {
   <Form.Group>
   <Form.Label >Current Menu</Form.Label>
   <Switch onChange={handleChange} name="currentMenu" checked={newFoodItem.currentMenu} />
-  {/* needs handle change  */}
   </Form.Group>
   <Form.Select onChange={handleChange} name="type" value={newFoodItem.type}>  
   <option>Choose menu type</option>

@@ -6,7 +6,7 @@ class AllergyDataService {
         return http.get("/allergy")
     }
     get(id){
-        return http.get(`/allergy?_id=${id}`)
+        return http.get(`/allergy?id=${id}`)
     }
 
     createFoodItem(data){
@@ -31,6 +31,10 @@ class AllergyDataService {
 
     updateFoodItem(data) {
         return http.put("/allergy", data)
+    }
+
+    deleteFoodItem(id) {
+        return http.delete(`/allergy?id=${id}`)
     }
 }
 

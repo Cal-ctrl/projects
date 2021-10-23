@@ -43,6 +43,7 @@ function AllergenRender() {
                 allergyInfo={allergyInfo}
                 id={food._id}
                 foodOb={food}
+                getAll={retrieveFoodList}
             /> 
         )      
         })}

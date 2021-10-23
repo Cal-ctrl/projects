@@ -11,8 +11,7 @@ import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 import Fab from '@mui/material/Fab';
 import AllergyDataService from "../services/allergy";
 import { Link } from "react-router-dom";
-
-
+import Collapse from '@mui/material/Collapse';
 
 function FilterOptions(props) {
 
@@ -81,11 +80,8 @@ function FilterOptions(props) {
       Object.keys(filterSchema.diets).forEach(v => filterSchema.diets[v] = false)
       Object.keys(filterSchema.allergyInfo).forEach(v => filterSchema.allergyInfo[v] = false)
       setTempFilterObject(filterSchema)
-      setFilterState(prevState => {
-        prevState = !prevState
-        return prevState
-        })
   }
+
   function handleFilter(){
     console.log(filters)
     AllergyDataService.find(filters)
@@ -106,10 +102,9 @@ function FilterOptions(props) {
 
 
     return <Container fluid> 
-    <h3 style={{display: "inline"}}>Options</h3><Fab sx={{display: "inline"}} size="small" onClick={handleExpand}>{filterState ? <ExpandMoreIcon fontSize="small" /> : <ExpandLessIcon fontSize="small" />}</Fab>
-
-    {filterState &&
-    <div>
+    <h3 style={{display: "inline"}}>Options</h3><Fab sx={{display: "inline"}} size="small" onClick={() => setFilterState(!filterState)}>{filterState ? <ExpandMoreIcon fontSize="small" /> : <ExpandLessIcon fontSize="small" />}</Fab>
+    <Collapse in={filterState} timeout="auto" unmountOnExit>
+    <div >
       <Box sx={{
     display: 'grid',
     gap: 1,
@@ -139,7 +134,8 @@ function FilterOptions(props) {
 
     </Box>
     </div>
-      }
+
+      </Collapse>
     </Container>
 }
 
