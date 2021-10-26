@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Form from 'react-bootstrap/Form'
 import Switch from '@mui/material/Switch';
+import _default from "@mui/utils/elementTypeAcceptingRef";
 
 
 
@@ -11,10 +12,12 @@ function DietFilter(props) {
 
     return (
         <Form.Group>
+        <Form.Label>Diet preference</Form.Label>
         {dietFilter.map(([k, v], i) => {
+            const tempName = k.replace(/_/g, " ")
             return (
             <div key={i}>
-            <Switch onChange={(e)=> {
+            <Switch color="warning" onChange={(e)=> {
                 e.preventDefault()
                 try{
                     props.onChange(e);
@@ -24,7 +27,7 @@ function DietFilter(props) {
                 }
                 
             }} name={k} checked={v}/>
-            <Form.Label>{k}</Form.Label>
+            <Form.Label>{tempName}</Form.Label>
             </div>
             )
         })}

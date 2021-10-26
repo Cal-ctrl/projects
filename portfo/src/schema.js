@@ -29,7 +29,10 @@ const schema = {
         Lupin:true,
         Molluscs:true},
     currentMenu:true,
-    type: ""
+    type: "",
+    imgURL: "",
+    dateAdded: "",
+    dateOffMenu: ""
 }
 
 export default schema;

@@ -38,3 +38,16 @@ body {
     justify-content: space-between;
   }
 
+.menu-head {
+  align-items: center;
+  justify-content: space-around;
+  text-align: center;
+}
+
+.filter-option {
+  background-color: #EAEAEA;
+  }
+
+.menu-item {
+  background-color: #08D9D6;
+}

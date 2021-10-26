@@ -14,12 +14,22 @@ import { Link } from "react-router-dom";
 import Collapse from '@mui/material/Collapse';
 
 function FilterOptions(props) {
+  const initialFilter = schema
 
-    const [tempFilterObject, setTempFilterObject] = useState(schema)
+    const [tempFilterObject, setTempFilterObject] = useState(initialFilter)
     
     const [filterState, setFilterState] = useState(false)
 
     const [filters, setFilters] = useState({})
+
+    useEffect(() => {
+      handleClear()
+    }, [])
+
+    const boxStyle = {
+      display: 'grid',
+      gap: 1,
+      gridTemplateColumns: 'repeat(2, 1fr)',}
 
     function handleChange(e){
       const misc = {...tempFilterObject}
@@ -68,7 +78,7 @@ function FilterOptions(props) {
       }
 
     } catch(e) {
-      console.error(`error in setting filters when checking if vlaue id switch: ${e}`)
+      console.error(`error in setting filters when checking if value id switch: ${e}`)
     }
     console.log(filters);
 
@@ -97,24 +107,22 @@ function FilterOptions(props) {
     handleExpand();
     setFilters({});
     props.getAll();
+    return console.log("All Cleared")
   }
 
 
 
-    return <Container fluid> 
-    <h3 style={{display: "inline"}}>Options</h3><Fab sx={{display: "inline"}} size="small" onClick={() => setFilterState(!filterState)}>{filterState ? <ExpandMoreIcon fontSize="small" /> : <ExpandLessIcon fontSize="small" />}</Fab>
+    return <div className="filter-option"><Container  > 
+    <h3 style={{display: "inline"}}>Options</h3><Fab sx={{display: "inline", ml: 1, mb:1}} style={{
+    maxHeight: "30px",
+    minHeight: "30px",
+    minWidth: "30px",
+    maxWidth: "30px",
+}} onClick={() => setFilterState(!filterState)}>{!filterState ? <ExpandMoreIcon  fontSize="small" /> : <ExpandLessIcon fontSize="small" />}</Fab>
     <Collapse in={filterState} timeout="auto" unmountOnExit>
     <div >
-      <Box sx={{
-    display: 'grid',
-    gap: 1,
-    gridTemplateColumns: 'repeat(2, 1fr)',
-  }}>
-    <Box sx={{
-    display: 'grid',
-    gap: 1,
-    gridTemplateColumns: 'repeat(2, 1fr)',
-  }}>
+      <Box sx={boxStyle}>
+    <Box sx={boxStyle}>
     <NameFilter onChange={handleChange} filterName={tempFilterObject} />
     <DietFilter onChange={handleDietChange} dietFilterArray={tempFilterObject} />
     </Box>
@@ -137,6 +145,7 @@ function FilterOptions(props) {
 
       </Collapse>
     </Container>
+    </div>
 }
 
 export default FilterOptions;

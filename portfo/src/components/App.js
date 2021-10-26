@@ -11,6 +11,8 @@ import Contact from './Pages/Contact';
 import ProjectPage from "./Pages/ProjectPage"
 import AllergenPage from './Pages/AllergenPage';
 import AddFood from './addFood';
+import MealInfo from './MealInfo';
+
 
 
 function App() {
@@ -30,6 +32,12 @@ function App() {
               <AddFood {...props}/>
             )}
             />
+    <Route 
+        path="/allergen/:id"
+        render={(props) => (
+          <MealInfo {...props}/>
+        )}
+        />
     <Route path="/allergen" component={AllergenPage} />
     <Route path="/" component={Home} />
 </Switch>

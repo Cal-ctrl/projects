@@ -18,11 +18,12 @@ function FoodCard (props) {
       AllergyDataService.deleteFoodItem(id)
       .then(responce => {
         console.log(responce.data)
+      return props.getAll();
+
       })
     } catch(e) {
       console.error(`error in Allergy Data service delete req: ${e}`)
     }
-    props.getAll();
 
   }
 
@@ -37,9 +38,11 @@ function FoodCard (props) {
       </Typography>
       <List>
       {props.dietInfo.map(([k,v], i) =>{
+        k = k.replace(/_/g, " ")
         return (v && <ListItem>Suitable for {k}</ListItem>)
       })}      
       {props.allergyInfo.map(([k,v], i) =>{
+        k = k.replace(/_/g, " ")
         return (v && <ListItem>Contains {k}</ListItem>)
       })}
       </List>
@@ -48,7 +51,10 @@ function FoodCard (props) {
     </CardContent>
     <CardActions>
     <Link variant="button" className="btn btn-outline-primary btn-sm" to={{
-        pathname: "/"
+        pathname: "/allergen/" + props.id,
+        state: {
+          currentFood: props.foodOb
+        }
           }}>Learn More</Link>
     <Button color="primary" size="small" variant="outlined" sx={{ml: "10px"}} onClick={(e) => {
     e.preventDefault();

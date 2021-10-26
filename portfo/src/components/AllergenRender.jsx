@@ -24,12 +24,19 @@ function AllergenRender() {
 
 
     return (
-        <Container  >
+        <Container  fluid>
+
         <FilterOptions setFoodList={setFoodList} getAll={retrieveFoodList} />
-        <Box   sx={{
+        <Container className="bg-light" fluid>
+        <h1 className="menu-head">Menu Items</h1>
+
+        <Container >
+
+        <Box sx={{
     display: 'grid',
     gap: 1,
     gridTemplateColumns: 'repeat(4, 1fr)',
+    
   }}>
 
         {foodList.map(food => {
@@ -48,6 +55,10 @@ function AllergenRender() {
         )      
         })}
         </Box>
+        </Container>
+
+        </Container>
+
         </Container>
 
     );
