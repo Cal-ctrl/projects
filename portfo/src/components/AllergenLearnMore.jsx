@@ -33,7 +33,9 @@ function AllergenLearnMore(props) {
         title={props.stateKey ? " Allergen Information" : "Dietry Information" }
         subheader="Full information below" />
         <CardContent>
-
+        <Typography sx={{ fontSize: 20 }} color="text.secondary" gutterBottom>
+        {props.stateKey ? "Allergens in this item" : "Suitable if following these diets" }
+      </Typography>
         <List>
         {fullInfo.map(([k,v], i) =>{
         k = k.replace(/_/g, " ")

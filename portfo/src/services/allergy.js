@@ -19,10 +19,12 @@ class AllergyDataService {
         const queries = Object.entries(query)
         queries.forEach(([k,v], i) => {
             const amountQueries = queries.length - 1
+            const valueQuery = String(v).replace(/ /g, "%20");
+            
         if (i === amountQueries) {
-            string = string.concat(String(k), "=", String(v))
+            string = string.concat(String(k), "=", valueQuery)
         } else {
-            string = string.concat(String(k), "=", String(v),"&")
+            string = string.concat(String(k), "=", valueQuery,"&")
         }
         })
         console.log(string);
@@ -35,6 +37,14 @@ class AllergyDataService {
 
     deleteFoodItem(id) {
         return http.delete(`/allergy?id=${id}`)
+    }
+
+    sendSelected(data) {
+        console.log(data);
+        return http.post("/download", data)
+    }
+    downloadSelected() {
+        return http.get("/download", {responseType: "blob"});
     }
 }
 

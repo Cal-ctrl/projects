@@ -2,6 +2,7 @@ import express from "express";
 import ProjectCtrl from "./projects.controller.js"
 import AllergyCtrl from "./allergy.controller.js" 
 
+
 const router = express.Router()
 
 router.route("/").get(ProjectCtrl.apiGetProjects)

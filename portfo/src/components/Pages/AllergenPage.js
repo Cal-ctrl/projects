@@ -3,9 +3,7 @@ import AllergenRender from "../AllergenRender"
 
 function AllergenPage() {
     return (
-        <div> 
         <AllergenRender />
-        </div>
     );
     }
 

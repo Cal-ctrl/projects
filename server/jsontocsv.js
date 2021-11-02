@@ -1,39 +1,7 @@
 import {Parser} from "json2csv";
 import fs from "fs";
-import { dirname } from "path";
+import Excel from "exceljs";
 
-const schema = {
-    name: "",
-     diets:{
-        Vegan:false,
-        Vegetarian:false,
-        Halal_Certified :false,
-        Kosher :false,
-        Gluten_Free:false
-    }
-        ,
-    allergyInfo: {
-        Cereals_containing_gluten:true,
-        Wheat:true,
-        Rye:true,
-        Barley:true,
-        Oats:true,
-        Crustaceans:true,
-        Eggs:true,
-        Fish:true,
-        Peanuts:true,
-        Soybeans:true,
-        Milk_and_milk_proteins:true,
-        Nuts:true,
-        Celery:true,
-        Mustard:true,
-        Sesame:true,
-        Sulphites:true,
-        Lupin:true,
-        Molluscs:true},
-    currentMenu:true,
-    type: ""
-}
 
 function convertToCsv(jsobject) {
     let fields = {}
@@ -50,5 +18,33 @@ function convertToCsv(jsobject) {
       })
 
 }
+ 
+function convertObejectToArray (jsobject) {
+    var op = [];
+Object.keys(jsobject).forEach(function(key) {
+  var obj = {};
+  var input = String(key)
+  obj.key = input; // Assign columns the keys from the Object
+  op.push(obj); 
+    })
+    return op
+}
 
-convertToCsv(schema)
+async function writeToXlsx(jsobject) {
+    let fields = {}
+    fields = {name: jsobject.name, ...jsobject.diets,blank:"", ...jsobject.allergyInfo, }; //Create Object without any nested data
+    const headers = convertObejectToArray(fields)
+    const templateWorkbook = new Excel.Workbook();
+    await templateWorkbook.xlsx.readFile("./test.xlsx");
+    const worksheet = templateWorkbook.getWorksheet('allergen');
+    worksheet.columns = headers;
+
+    worksheet.insertRow(6, fields, "i")
+    await templateWorkbook.xlsx.writeFile("./test3.xlsx");
+}
+
+
+// writeToXlsx(schema)
+
+
+

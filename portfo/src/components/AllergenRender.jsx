@@ -4,11 +4,16 @@ import AllergyDataService from "../services/allergy";
 import Foodcard from "./Foodcard.jsx";
 import { Box } from '@mui/system';
 import FilterOptions from "./FilterOptions.jsx";
+import Button from '@mui/material/Button';
+
+import {Parser} from "json2csv";
 
 
 function AllergenRender() {
 
     const [foodList, setFoodList] = useState([])
+    const [downloadButton, setDownloadButton] = useState(false)
+    const [downloadSelected, setDownloadSelected] = useState([])
 
     useEffect(()=>{
         retrieveFoodList()
@@ -22,15 +27,48 @@ function AllergenRender() {
         })
     }
 
+    function collateDownloadSelect (e, selected) {
+
+        if (e.target.checked) {
+            const tempArray = [...downloadSelected]
+            tempArray.push(selected)
+            setDownloadSelected(tempArray)
+    
+        } else {
+            console.log(`unchecked`);
+        }
+        
+        return;
+
+    }
+
+    function downloadSelectedFunc () {
+            const unested = []
+            downloadSelected.map((jsonObject) =>{
+                let fields = {}
+                fields = {name: jsonObject.name, ...jsonObject.diets,blank:"", ...jsonObject.allergyInfo, }; //Create Object without any nested data
+                console.log(fields);
+                unested.push(fields)
+                })
+            const json2csvParser = new Parser();
+            const csv = json2csvParser.parse(unested);
+            
+            const link = document.createElement('a')
+            link.href = 'data:text/csv,' + encodeURIComponent(csv)
+            link.download = 'allergen.csv'
+            link.click()
+          }
+
 
     return (
-        <Container  fluid>
+        <Container className="padding-rm" fluid>
 
         <FilterOptions setFoodList={setFoodList} getAll={retrieveFoodList} />
         <Container className="bg-light" fluid>
         <h1 className="menu-head">Menu Items</h1>
 
         <Container >
+        {downloadButton && <Button onClick={downloadSelectedFunc}>Download</Button>}
 
         <Box sx={{
     display: 'grid',
@@ -51,6 +89,8 @@ function AllergenRender() {
                 id={food._id}
                 foodOb={food}
                 getAll={retrieveFoodList}
+                downloadCheck={collateDownloadSelect}
+                downloadButton={setDownloadButton}
             /> 
         )      
         })}

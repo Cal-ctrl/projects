@@ -6,7 +6,7 @@ import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import AllergyDataService from "../services/allergy";
-
+import Checkbox from '@mui/material/Checkbox';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 
@@ -35,6 +35,7 @@ function FoodCard (props) {
     <CardContent>
       <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
         {props.name}
+
       </Typography>
       <List>
       {props.dietInfo.map(([k,v], i) =>{
@@ -65,6 +66,11 @@ function FoodCard (props) {
               currentFood: props.foodOb
             }
           }}>Update</Link>
+        <Checkbox onChange={(e) => {
+          e.preventDefault();
+          props.downloadCheck(e, props.foodOb)
+          props.downloadButton(e.target.checked)
+        } } size="small" />
 
     </CardActions>
   </Card>
