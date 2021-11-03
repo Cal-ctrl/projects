@@ -9,16 +9,16 @@ router.route("/").get(ProjectCtrl.apiGetProjects)
 
 router
     .route("/projects")
-    .post(ProjectCtrl.apiPostProject)
-    .put(ProjectCtrl.apiUpdateProject)
-    .delete(ProjectCtrl.apiDeleteProject)
+    .post(ProjectCtrl.apiPostProject) // Auth Needed
+    .put(ProjectCtrl.apiUpdateProject) // Auth Needed
+    .delete(ProjectCtrl.apiDeleteProject) //Auth Needed
 
 
 router.route("/allergy")
     .get(AllergyCtrl.apiGetAllergyInfo)
-    .post(AllergyCtrl.apiPostAllergyInfo)
-    .put(AllergyCtrl.apiUpdateAllergyInfo)
-    .delete(AllergyCtrl.apiDeleteAllergyInfo)
+    .post(AllergyCtrl.apiPostAllergyInfo) //Auth needed
+    .put(AllergyCtrl.apiUpdateAllergyInfo) // Auth Needed
+    .delete(AllergyCtrl.apiDeleteAllergyInfo) // Auth Needed
 
 
 

@@ -12,7 +12,7 @@ import {Parser} from "json2csv";
 function AllergenRender() {
 
     const [foodList, setFoodList] = useState([])
-    const [downloadButton, setDownloadButton] = useState(false)
+    const [downloadButton, setDownloadButton] = useState(0)
     const [downloadSelected, setDownloadSelected] = useState([])
 
     useEffect(()=>{
@@ -68,12 +68,12 @@ function AllergenRender() {
         <h1 className="menu-head">Menu Items</h1>
 
         <Container >
-        {downloadButton && <Button onClick={downloadSelectedFunc}>Download</Button>}
+        {downloadButton > 0 && <Button onClick={downloadSelectedFunc}>Download</Button>}
 
-        <Box sx={{
+        <Box className="food-cards" sx={{
     display: 'grid',
     gap: 1,
-    gridTemplateColumns: 'repeat(4, 1fr)',
+    gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))"
     
   }}>
 

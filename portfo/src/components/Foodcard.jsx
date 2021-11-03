@@ -69,7 +69,10 @@ function FoodCard (props) {
         <Checkbox onChange={(e) => {
           e.preventDefault();
           props.downloadCheck(e, props.foodOb)
-          props.downloadButton(e.target.checked)
+          props.downloadButton(preValue => {
+            e.target.checked ? preValue = preValue + 1 : preValue = preValue -1
+            return preValue
+          })
         } } size="small" />
 
     </CardActions>
