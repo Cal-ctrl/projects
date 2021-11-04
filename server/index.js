@@ -19,6 +19,10 @@ MongoClient.connect(
     await ProjectsDAO.injectDB(client);
     await AllergyDAO.injectDB(client);
 
+    if (process.env.NODE_ENV == "production") {
+        app.use(express.static(`portfo/build`));
+    }
+    
     app.listen(port, ()=> {
         console.log(`listening on port ${port}`)
     })
