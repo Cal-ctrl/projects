@@ -53,4 +53,4 @@ class AllergyDataService {
     }
 }
 
-export default new AllergyDataService
+export default new AllergyDataService;

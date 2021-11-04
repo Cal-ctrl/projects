@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
-import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import AllergyDataService from "../services/allergy";
 import Checkbox from '@mui/material/Checkbox';
@@ -14,7 +13,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 
 function FoodCard (props) {
 
-  const { user, isAuthenticated, isLoading, getAccessTokenSilently } = useAuth0();
+  const { isAuthenticated, getAccessTokenSilently } = useAuth0();
 
   async function handleDelete(id) {
     const token = await getAccessTokenSilently();
@@ -45,11 +44,11 @@ function FoodCard (props) {
       <List>
       {props.dietInfo.map(([k,v], i) =>{
         k = k.replace(/_/g, " ")
-        return (v && <ListItem>Suitable for {k}</ListItem>)
+        return (v && <ListItem key={i}>Suitable for {k}</ListItem>)
       })}      
       {props.allergyInfo.map(([k,v], i) =>{
         k = k.replace(/_/g, " ")
-        return (v && <ListItem>Contains {k}</ListItem>)
+        return (v && <ListItem key={i}>Contains {k}</ListItem>)
       })}
       </List>
 

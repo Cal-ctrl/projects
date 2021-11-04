@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Fab from '@mui/material/Fab';
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 

@@ -23,4 +23,4 @@ class ProjectDataService {
     }
 }
 
-export default new ProjectDataService
+export default new ProjectDataService;

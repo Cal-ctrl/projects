@@ -49,6 +49,7 @@ function AllergenRender() {
                 fields = {name: jsonObject.name, ...jsonObject.diets,blank:"", ...jsonObject.allergyInfo, }; //Create Object without any nested data
                 console.log(fields);
                 unested.push(fields)
+                return
                 })
             const json2csvParser = new Parser();
             const csv = json2csvParser.parse(unested);
@@ -77,12 +78,13 @@ function AllergenRender() {
     
   }}>
 
-        {foodList.map(food => {
+        {foodList.map((food, i) => {
             const dietInfo = Object.entries(food.diets)
             const allergyInfo = Object.entries(food.allergyInfo)
 
         return (
-            <Foodcard 
+            <Foodcard
+                key={i} 
                 name={food.name}
                 dietInfo={dietInfo}
                 allergyInfo={allergyInfo}

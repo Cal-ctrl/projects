@@ -8,8 +8,8 @@ dotenv.config()
 
 ReactDOM.render(
   <Auth0Provider
-  domain={process.env.REACT_APP_AUTHO_DOMAIN}
-  clientId={process.env.REACT_APP_AUTHO_CLIENT_ID}
+  domain="dev-yzf7krro.us.auth0.com"
+  clientId="6LZXpcorftiFzbVqc3NCuYIbzLaFzdAg"
   redirectUri={window.location.origin}
   audience='https://portfo-api-users'>
 

@@ -32,11 +32,11 @@ function Projects(props) {
                     projectId={project._id}
                     img={project.img}
                     content={project.about}
-                    className={i % 2 == 0 ? "article" : "article alt"}
-                    id={i % 2 == 0 ? "left" : "right"}
+                    className={i % 2 === 0 ? "article" : "article alt"}
+                    id={i % 2 === 0 ? "left" : "right"}
                     key={i}
                     name={project.name}
-                    alt={i % 2 == 0 ? true : false}
+                    alt={i % 2 === 0 ? true : false}
                     upVote={true}
                     upVotes={project.upvotes}
                 />

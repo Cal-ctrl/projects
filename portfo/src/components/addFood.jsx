@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import AllergyDataService from "../services/allergy";
 import schema from '../schema';
 import Form from 'react-bootstrap/Form'
