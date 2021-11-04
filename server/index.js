@@ -3,6 +3,7 @@ import mongodb from "mongodb"
 import dotenv from "dotenv"
 import ProjectsDAO from "./dao/projectsDAO.js"
 import AllergyDAO from "./dao/allergyDAO.js"
+import path from "path"
 dotenv.config()
 
 const MongoClient = mongodb.MongoClient
@@ -19,10 +20,17 @@ MongoClient.connect(
     await ProjectsDAO.injectDB(client);
     await AllergyDAO.injectDB(client);
 
-    if (process.env.NODE_ENV == "production") {
-        app.use(express.static(`portfo/build`));
+    //server static assets if in production
+    if (process.env.NODE_ENV === "production") {
+        app.use(express.static(path.join(__dirname, `portfo/build`)));
+
+        app.get("*", (req, res) => {
+            res.sendFile(path.resolve(__dirname, "portfo", "build", "index.html"))
+        });
+
+        
     }
-    
+
     app.listen(port, ()=> {
         console.log(`listening on port ${port}`)
     })

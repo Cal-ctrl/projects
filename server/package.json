@@ -9,9 +9,7 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "cd portfo && npm run build",
-    "install-portfo": "cd portfo && npm install",
-    "heroku-postbuild": "npm run install-portfo && npm run build",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm run install --prefix portfo && npm run build --prefix portfo",
     "start": "node index.js"
   },
   "author": "C A McNeil",
