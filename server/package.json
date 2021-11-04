@@ -4,12 +4,15 @@
   "description": "Portfo Server",
   "main": "index.js",
   "type": "module",
+  "engines": {
+    "node": "14.x" 
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "cd portfo && npm run build",
     "install-portfo": "cd portfo && npm install",
     "heroku-postbuild": "npm run install-portfo && npm run build",
-    "start": "npm server.js"
+    "start": "node index.js"
   },
   "author": "C A McNeil",
   "license": "ISC",
