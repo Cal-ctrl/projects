@@ -9,13 +9,18 @@ import AllergyDataService from "../services/allergy";
 import Checkbox from '@mui/material/Checkbox';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
+import { useAuth0 } from "@auth0/auth0-react";
 
 
 function FoodCard (props) {
 
-  function handleDelete(id) {
+  const { user, isAuthenticated, isLoading, getAccessTokenSilently } = useAuth0();
+
+  async function handleDelete(id) {
+    const token = await getAccessTokenSilently();
+
     try {
-      AllergyDataService.deleteFoodItem(id)
+      AllergyDataService.deleteFoodItem(id, token)
       .then(responce => {
         console.log(responce.data)
       return props.getAll();
@@ -57,9 +62,10 @@ function FoodCard (props) {
           currentFood: props.foodOb
         }
           }}>Learn More</Link>
-    <Button color="primary" size="small" variant="outlined" sx={{ml: "10px"}} onClick={(e) => {
+    {isAuthenticated && <div>
+    <Link variant="button" className="btn btn-outline-primary btn-sm" to=""  onClick={(e) => {
     e.preventDefault();
-    handleDelete(props.id)}}>Delete</Button>
+    handleDelete(props.id)}}>Delete</Link>
     <Link variant="button" className="btn btn-outline-primary btn-sm" to={{
         pathname: "/allergen/" + props.id + "/add",
         state: {
@@ -73,8 +79,9 @@ function FoodCard (props) {
             e.target.checked ? preValue = preValue + 1 : preValue = preValue -1
             return preValue
           })
-        } } size="small" />
-
+        } } size="small" /> 
+        </div> }
+    
     </CardActions>
   </Card>
 

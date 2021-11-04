@@ -9,7 +9,8 @@ class AllergyDataService {
         return http.get(`/allergy?id=${id}`)
     }
 
-    createFoodItem(data){
+    createFoodItem(data, token){
+        http.defaults.headers.common['Authorization'] = `Bearer ${token}`;
         return http.post("/allergy", data)
     }
 
@@ -31,11 +32,15 @@ class AllergyDataService {
         return http.get(`/allergy?${string}`);
       } 
 
-    updateFoodItem(data) {
+    updateFoodItem(data, token) {
+        http.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+
         return http.put("/allergy", data)
     }
 
-    deleteFoodItem(id) {
+    deleteFoodItem(id, token) {
+        // const axiosConfig = {headers: {Authorisation = `Bearer ${token}`}}
+        http.defaults.headers.common['Authorization'] = `Bearer ${token}`;
         return http.delete(`/allergy?id=${id}`)
     }
 

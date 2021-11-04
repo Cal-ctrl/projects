@@ -7,11 +7,23 @@ import Button from 'react-bootstrap/Button'
 import { Container } from '@mui/material';
 import DietForm from './DietForm';
 import { Link } from "react-router-dom";
+import { useAuth0 } from "@auth0/auth0-react";
+import { Box } from '@mui/system';
+
 
 
 function AddFood(props) {
     let updateOrReview = false
     let initialFood = schema
+
+    const { getAccessTokenSilently } = useAuth0();
+    
+    const style = {
+        display: 'grid',
+        gap: 1,
+        gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))"}
+
+
 
 
      if (props.location.state && props.location.state.currentFood) {
@@ -24,9 +36,9 @@ function AddFood(props) {
 
     const [submitted, setSubmitted] = useState(false)
 
-    function addFood(data) {
-        console.log(data);
-        AllergyDataService.createFoodItem(data)
+    async function addFood(data) {
+        const token = await getAccessTokenSilently();
+        AllergyDataService.createFoodItem(data, token)
             .then(responce =>{
                 setSubmitted(true);
                 console.log(responce.data); }
@@ -34,8 +46,10 @@ function AddFood(props) {
         ;
     }
 
-    function updateFood(data) {
-        AllergyDataService.updateFoodItem(data)
+    async function updateFood(data) {
+        const token = await getAccessTokenSilently();
+
+        AllergyDataService.updateFoodItem(data, token)
             .then(r => {
                 setSubmitted(true);
                 console.log(r.data);
@@ -82,14 +96,12 @@ function AddFood(props) {
     <Form.Label>Name</Form.Label>
     <Form.Control onChange={handleChange} type="text" placeholder="Enter Food item here" name="name" value={newFoodItem.name}/>
   </Form.Group>
+        <Box sx={style}>
+    <div>
   <h1>Diet Info</h1>
   <DietForm newDietInfo={newFoodItem.diets} onChange={handleDietChange} />
-  <h1>Allergy Info</h1>
-  <DietForm newDietInfo={newFoodItem.allergyInfo} onChange={handleAllergenChange} />
-  <Form.Group>
-  <Form.Label >Current Menu</Form.Label>
-  <Switch onChange={handleChange} name="currentMenu" checked={newFoodItem.currentMenu} />
-  </Form.Group>
+  <h3>Menu Information</h3>
+  <Form.Group >
   <Form.Select onChange={handleChange} name="type" value={newFoodItem.type}>  
   <option>Choose menu type</option>
   <option value="Starter">Starter</option>
@@ -98,6 +110,10 @@ function AddFood(props) {
   <option value="Side">Side</option>
   <option value="Drink">Drink</option>
   </Form.Select>
+
+  <Switch onChange={handleChange} name="currentMenu" checked={newFoodItem.currentMenu} />
+  <Form.Label >Current Menu</Form.Label>
+  </Form.Group>
   {updateOrReview ?   <Button variant="primary" type="submit" onClick={(e) => {
                                                             e.preventDefault();
                                                             updateFood(newFoodItem);}}>
@@ -111,6 +127,17 @@ function AddFood(props) {
     Submit
   </Button>}
 
+  </div>
+  <div>
+  <h1>Allergy Info</h1>
+  <Box sx={{display: 'grid',
+        gap: 1,
+        gridTemplateColumns: "repeat(2, 1fr)"}}>
+  <DietForm newDietInfo={newFoodItem.allergyInfo} onChange={handleAllergenChange} />
+  </Box>
+  </div>
+  </Box>
+   
 </Form>      }
 </Container>
     )

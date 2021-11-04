@@ -12,7 +12,7 @@ function DietForm (props) {
             return (
                 <div key={i}>
                 <Switch onChange={props.onChange} name={k} checked={v}/>
-                <Form.Label>{k}</Form.Label>
+                <Form.Label>{k.replace(/_/g, " ")}</Form.Label>
                 </div>
             )
         })
